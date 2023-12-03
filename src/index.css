@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Contrail+One&family=DM+Sans:opsz,wght@9..40,100;9..40,300;9..40,400&family=Poppins&family=Raleway:ital,wght@0,300;1,200&display=swap');.hero{
+    background-image: url(../src/Assest/bg.jpeg);
+   background-size: contain;
+}
