@@ -62,7 +62,7 @@ export default function App() {
             <Link  to="Services">Apply Now</Link>
             </button>
             <button className="px-5 py-3 rounded font-[DMSans] text-xl bg-gray-800 hover:bg-gray-900 hover:text-white duration-300">
-               <Link  to="About"> Job Seekers</Link>
+              We Are Hiring
             </button>
           </div>
         </div>

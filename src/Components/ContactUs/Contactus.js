@@ -1,22 +1,72 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IoCallSharp } from "react-icons/io5";
 import Newsletter from "../newsletter/NewsLetter";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import emailjs from "emailjs-com";
+
 function Contactus() {
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Set the animation duration
-      once: true, // Set whether animation should only happen once
+      duration: 1000,
+      once: true,
     });
   }, []);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Use your own template ID and service ID from email.js
+    const templateParams = {
+      to_email: "recipient@example.com", // Replace with the recipient email address
+      from_name: formData.name,
+      from_email: formData.email,
+      contact_number: formData.number,
+      message: formData.message,
+    };
+
+    // Use your own user ID from email.js
+    emailjs
+      .send(
+        "service_5ft8exm",
+        "template_8pzvb3t",
+        templateParams,
+        "SBmNeoVQN0eWvXHka"
+      )
+      .then(
+        (response) => {
+          console.log("Email sent successfully:", response);
+          // Handle success, e.g., show a success message or redirect
+        },
+        (error) => {
+          console.error("Email failed to send:", error);
+          // Handle error, e.g., show an error message
+        }
+      );
+  };
   return (
     <div>
       <div
-      data-aos="fade-right"
-      data-aos-offset="300"
-      data-aos-easing="ease-in-sine"
-      className="bg-gradient-to-b from-blue-500 to-black h-[400px] overflow-hidden ">
+        data-aos="fade-right"
+        data-aos-offset="300"
+        data-aos-easing="ease-in-sine"
+        className="bg-gradient-to-b from-blue-500 to-black h-[400px] overflow-hidden "
+      >
         <div className="flex flex-col-reverse lg:flex-row justify-between lg:gap-2">
           <div className=" justify-center  lg:ps-10 flex flex-col gap-6">
             <h1 className="text-[#D1D5DB] text-center font-semibold font-[raleway] mt-5 lg:mt-0 text-2xl lg:text-5xl">
@@ -32,9 +82,9 @@ function Contactus() {
           </div>
 
           <svg
-data-aos="fade-up"
-data-aos-offset="300"
-data-aos-easing="ease-in-sine"
+            data-aos="fade-up"
+            data-aos-offset="300"
+            data-aos-easing="ease-in-sine"
 
             focusable="false"
             className="hero__honeycom lg:h-[370px] h-[120px] lg:w-[320px] "
@@ -70,10 +120,10 @@ data-aos-easing="ease-in-sine"
         </div>
       </div>
       <div
-      data-aos="fade-left"
-      data-aos-offset="300"
-      data-aos-easing="ease-in-sine"
-      className="mt-10 flex flex-col lg:flex-row justify-evenly gap-6 lg:gap-0 px-4 lg:px-0">
+        data-aos="fade-left"
+        data-aos-offset="300"
+        data-aos-easing="ease-in-sine"
+        className="mt-10 flex flex-col lg:flex-row justify-evenly gap-6 lg:gap-0 px-4 lg:px-0">
         <div className="flex flex-col justify-center items-center text-center lg:text-start ">
           <span className="text-2xl  font-[poppins] font-bold ">
             How can we help?
@@ -81,27 +131,39 @@ data-aos-easing="ease-in-sine"
           <p className="font-[ralewy]  mt-2">
             Fill out this form or contact your local office.
           </p>
-          <form className="flex flex-col gap-8 mt-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-8 mt-5">
             <input
               type="text"
               className="border-2 w-[300px] h-[39px] placeholder:font-[poppins] placeholder:text-black border-gray-400 shadow"
               placeholder="Name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
             />
             <input
               type="email"
               className="border-2 w-[300px] h-[39px] placeholder:font-[poppins] placeholder:text-black border-gray-400 shadow"
               placeholder="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
             />
             <input
               type="number"
               className="border-2 w-[300px] h-[39px] placeholder:font-[poppins] placeholder:text-black border-gray-400 shadow"
               placeholder="Number"
+              name="number"
+              value={formData.number}
+              onChange={handleChange}
             />
             <textarea
               rows={5}
               cols={40}
               placeholder="Message"
               className=" placeholder:font-[poppins] w-[300px] placeholder:text-black border-gray-400 shadow px-4 pt-4"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
             ></textarea>
             <div className="mx-auto">
               <button
@@ -208,9 +270,9 @@ data-aos-easing="ease-in-sine"
                   </a>
                 </li>
 
-                
 
-                
+
+
               </ul>
             </div>
             <div>
@@ -226,7 +288,7 @@ data-aos-easing="ease-in-sine"
           </div>
         </div>
       </div>
-      <Newsletter/>
+      <Newsletter />
     </div>
   );
 }
