@@ -16,7 +16,7 @@ function Contactus() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    number: "",
+    text: "",
     message: "",
   });
 
@@ -36,9 +36,10 @@ function Contactus() {
       to_email: "donotreplyepicsolutions@gmail.com", // Replace with the recipient email address
       from_name: formData.name,
       from_email: formData.email,
-      contact_number: formData.number,
+      from_text: formData.text,
       message: formData.message,
     };
+
 
     // Use your own user ID from email.js
     emailjs
@@ -54,7 +55,7 @@ function Contactus() {
           setFormData({
             name: "",
             email: "",
-            number: "",
+            text: "",
             message: "",
           });
         },
@@ -157,11 +158,11 @@ return (
             onChange={handleChange}
           />
           <input
-            type="number"
+            type="text"
             className="border-2 w-[300px] h-[39px] placeholder:font-[poppins] placeholder:text-black border-gray-400 shadow"
             placeholder="Number"
-            name="number"
-            value={formData.number}
+            name="text"
+            value={formData.text}
             onChange={handleChange}
           />
           <textarea
