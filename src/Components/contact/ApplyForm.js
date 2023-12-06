@@ -41,7 +41,7 @@ const ApplyForm = ({ onClose, selectedLocation }) => {
     )}`;
 
     // Construct the WhatsApp API link
-    const whatsappLink = `https://api.whatsapp.com/send?phone=7045063182&text=${message}`;
+    const whatsappLink = `https://api.whatsapp.com/send?phone=8097061134&text=${message}`;
 
     // Open WhatsApp link in a new tab
     window.open(whatsappLink, '_blank');
